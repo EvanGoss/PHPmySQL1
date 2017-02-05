@@ -17,6 +17,7 @@
     $catfoodqty = $_POST['catfoodqty'];
     $dogfoodqty = $_POST['dogfoodqty'];
     $fishfoodqty = $_POST['fishfoodqty'];
+    $find = $_POST['find'];
     
     $totalqty = 0;
     $totalqty = $birdfoodqty + $catfoodqty + $dogfoodqty + $fishfoodqty;
@@ -70,6 +71,24 @@
       echo 'Subtotal: $'.number_format($totalAmount, 2).'<br />';
       echo 'Discount: -$'.number_format($discountAmount, 2).' ('.$discount.'%)<br />';
       echo 'Total including tax: $'.number_format($totalAmount - $discountAmount + $totalTaxAmount, 2).'</p>';
+
+      switch ($find) {
+        case 'a' :
+          echo '<p>Regular Customer.</p>';
+          break;
+        case 'b' :
+          echo '<p>Customer referred by Mail Advertising.</p>';
+          break;
+        case 'c' :
+          echo '<p>Customer referred by Newspaper Advertising.</p>';
+          break;
+        case 'd' :
+          echo '<p>Customer referred by Word of Mouth.</p>';
+          break;
+        default :
+          echo '<p>We do not know how this customer found us.</p>';
+          break;
+      }
     }
   ?>
 </body>
