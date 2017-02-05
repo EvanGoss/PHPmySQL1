@@ -20,37 +20,57 @@
     
     $totalqty = 0;
     $totalqty = $birdfoodqty + $catfoodqty + $dogfoodqty + $fishfoodqty;
-    $totalamount = 0.00;
+    $totalAmount = 0.00;
 
     define('BIRDFOODPRICE', 3);
     define('CATFOODPRICE', 5);
     define('DOGFOODPRICE', 6);
     define('FISHFOODPRICE', 2);
     $taxrate = 0.10; // Local sales tax
+    $discount = 0;
+    $discountAmount = 0;
 
-    $totalamount = $birdfoodqty * BIRDFOODPRICE
+    $totalAmount = $birdfoodqty * BIRDFOODPRICE
       + $catfoodqty * CATFOODPRICE
       + $dogfoodqty * DOGFOODPRICE
       + $fishfoodqty * FISHFOODPRICE;
 
-    $totaltaxamount = $totalamount * $taxrate;
+    if ($totalAmount >= 50) {
+      $discount = 15;
+    }
+    else if ( $totalAmount >= 25 && $totalAmount < 50 ) {
+      $discount = 10;
+    }
+    else if ( $totalAmount > 10 && $totalAmount < 25 ) {
+      $discount = 5;
+    }
+
+    $discountAmount = $totalAmount * ($discount * 0.01);
+    $totalTaxAmount = ($totalAmount - $discountAmount) * $taxrate;
 
     echo '<p>Order processed at '; // Start processing order here
     echo date('H:i, jS F Y');
     echo '</p>';
 
-    // This will display the order summary
-    echo '<p>Your order is as follows:</p>';
-    echo htmlspecialchars($birdfoodqty).' bird food<br />';
-    echo htmlspecialchars($catfoodqty).' cat food<br />';
-    echo htmlspecialchars($dogfoodqty).' dog food<br />';
-    echo htmlspecialchars($fishfoodqty).' fish food<br />';
+    if ($totalqty == 0) {
+      echo '<p style="color:red">';
+      echo 'You did not order anything';
+      echo '</p>';
+    }
+    else
+    {
+      // This will display the order summary
+      echo '<p>Your order is as follows:</p>';
+      echo htmlspecialchars($birdfoodqty).' bird food<br />';
+      echo htmlspecialchars($catfoodqty).' cat food<br />';
+      echo htmlspecialchars($dogfoodqty).' dog food<br />';
+      echo htmlspecialchars($fishfoodqty).' fish food<br />';
 
-    echo '<p>Items Ordered: '.$totalqty.'<br />';
-    echo 'Subtotal: $'.number_format($totalamount, 2).'<br />';
-    echo 'Total including tax: $'.number_format($totalamount + $totaltaxamount, 2).'</p>';
-
-
+      echo '<p>Items Ordered: '.$totalqty.'<br />';
+      echo 'Subtotal: $'.number_format($totalAmount, 2).'<br />';
+      echo 'Discount: -$'.number_format($discountAmount, 2).' ('.$discount.'%)<br />';
+      echo 'Total including tax: $'.number_format($totalAmount - $discountAmount + $totalTaxAmount, 2).'</p>';
+    }
   ?>
 </body>
 </html>
