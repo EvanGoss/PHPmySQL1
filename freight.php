@@ -13,12 +13,14 @@
 
     <?php
       // This will loop through and create a new row for freight costs
-      for ($distance = 50; $distance <= 250; $distance += 50) {
+      $distance = 50;
+      do {
         echo '<tr>
             <td style=\"text-align: right;\">'.$distance.'</td>
             <td style=\"text-align: right;\">'.($distance / 10).'</td>
           </tr>'."\n";
-      }
+        $distance += 50;
+      } while ($distance <= 250);
     ?>
   </table>
 </body>
