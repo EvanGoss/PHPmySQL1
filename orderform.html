@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exotics and Pets - Order Form</title>
+</head>
+<body>
+  <form action="processorder.php" method="post">
+    <table border="0">
+      <tr bgcolor="#ccc">
+        <td width="150">Item</td>
+        <td width="15">Quantity</td>
+      </tr>
+      <tr>
+        <td>Bird Food</td>
+        <td align="center"><input type="text" name="birdfoodqty" size="3" maxlength="3"></td>
+      </tr>
+      <tr>
+        <td>Cat Food</td>
+        <td align="center"><input type="text" name="catfoodqty" size="3" maxlength="3"></td>
+      </tr>
+      <tr>
+        <td>Dog Food</td>
+        <td align="center"><input type="text" name="dogfoodqty" size="3" maxlength="3"></td>
+      </tr>
+      <tr>
+        <td>Fish Food</td>
+        <td align="center"><input type="text" name="fishfoodqty" size="3" maxlength="3"></td>
+      </tr>
+      <tr>
+        <td>How did you find Exotics and Pets?</td>
+        <td>
+          <select name="find">
+            <option value="a">I'm a regular customer</option>
+            <option value="b">Mail advertising</option>
+            <option value="c">Newspaper advertising</option>
+            <option value="d">Word of mouth</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center"><input type="submit" value="Submit Order"></td>
+      </tr>
+    </table>
+  </form>
+</body>
+</html>
