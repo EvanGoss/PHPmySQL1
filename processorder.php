@@ -57,38 +57,37 @@
       echo '<p style="color:red">';
       echo 'You did not order anything';
       echo '</p>';
+      exit;
     }
-    else
-    {
-      // This will display the order summary
-      echo '<p>Your order is as follows:</p>';
-      echo htmlspecialchars($birdfoodqty).' bird food<br />';
-      echo htmlspecialchars($catfoodqty).' cat food<br />';
-      echo htmlspecialchars($dogfoodqty).' dog food<br />';
-      echo htmlspecialchars($fishfoodqty).' fish food<br />';
+    
+    // This will display the order summary
+    echo '<p>Your order is as follows:</p>';
+    echo htmlspecialchars($birdfoodqty).' bird food<br />';
+    echo htmlspecialchars($catfoodqty).' cat food<br />';
+    echo htmlspecialchars($dogfoodqty).' dog food<br />';
+    echo htmlspecialchars($fishfoodqty).' fish food<br />';
 
-      echo '<p>Items Ordered: '.$totalqty.'<br />';
-      echo 'Subtotal: $'.number_format($totalAmount, 2).'<br />';
-      echo 'Discount: -$'.number_format($discountAmount, 2).' ('.$discount.'%)<br />';
-      echo 'Total including tax: $'.number_format($totalAmount - $discountAmount + $totalTaxAmount, 2).'</p>';
+    echo '<p>Items Ordered: '.$totalqty.'<br />';
+    echo 'Subtotal: $'.number_format($totalAmount, 2).'<br />';
+    echo 'Discount: -$'.number_format($discountAmount, 2).' ('.$discount.'%)<br />';
+    echo 'Total including tax: $'.number_format($totalAmount - $discountAmount + $totalTaxAmount, 2).'</p>';
 
-      switch ($find) {
-        case 'a' :
-          echo '<p>Regular Customer.</p>';
-          break;
-        case 'b' :
-          echo '<p>Customer referred by Mail Advertising.</p>';
-          break;
-        case 'c' :
-          echo '<p>Customer referred by Newspaper Advertising.</p>';
-          break;
-        case 'd' :
-          echo '<p>Customer referred by Word of Mouth.</p>';
-          break;
-        default :
-          echo '<p>We do not know how this customer found us.</p>';
-          break;
-      }
+    switch ($find) {
+      case 'a' :
+        echo '<p>Regular Customer.</p>';
+        break;
+      case 'b' :
+        echo '<p>Customer referred by Mail Advertising.</p>';
+        break;
+      case 'c' :
+        echo '<p>Customer referred by Newspaper Advertising.</p>';
+        break;
+      case 'd' :
+        echo '<p>Customer referred by Word of Mouth.</p>';
+        break;
+      default :
+        echo '<p>We do not know how this customer found us.</p>';
+        break;
     }
   ?>
 </body>
