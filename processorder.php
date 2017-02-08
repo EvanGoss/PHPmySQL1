@@ -9,7 +9,7 @@
   <h2>Order Results</h2>
   <?php
     /* Author: Evan Oldfield Goss
-       Last Modified: 2/4/17
+       Last Modified: 2/8/17
        This script will process the customer order
     */
     // create short variables
@@ -17,7 +17,9 @@
     $catfoodqty = $_POST['catfoodqty'];
     $dogfoodqty = $_POST['dogfoodqty'];
     $fishfoodqty = $_POST['fishfoodqty'];
-    $find = $_POST['find'];
+    $address = preg_replace('/\t|\R/', ' ', $_POST['address']);
+    $document_root  = $_SERVER['DOCUMENT_ROOT'];
+    $date = date('H:i, jS F Y');
     
     $totalqty = 0;
     $totalqty = $birdfoodqty + $catfoodqty + $dogfoodqty + $fishfoodqty;
@@ -72,23 +74,26 @@
     echo 'Discount: -$'.number_format($discountAmount, 2).' ('.$discount.'%)<br />';
     echo 'Total including tax: $'.number_format($totalAmount - $discountAmount + $totalTaxAmount, 2).'</p>';
 
-    switch ($find) {
-      case 'a' :
-        echo '<p>Regular Customer.</p>';
-        break;
-      case 'b' :
-        echo '<p>Customer referred by Mail Advertising.</p>';
-        break;
-      case 'c' :
-        echo '<p>Customer referred by Newspaper Advertising.</p>';
-        break;
-      case 'd' :
-        echo '<p>Customer referred by Word of Mouth.</p>';
-        break;
-      default :
-        echo '<p>We do not know how this customer found us.</p>';
-        break;
+    // Create the address line
+    echo '<p>Address to ship to is '.htmlspecialchars($address).'</p>';
+
+    // Create teh output string to write to file
+    $outputstring = $date."\t".$birdfoodqty." bird food \t".$catfoodqty." cat food\t".$dogfoodqty." dog food\t".$fishfoodqty." fish food\t\$".$totalAmount."\t".$address."\n";
+
+    // Open file for appending
+    @$fp = fopen($document_root."/cim/orders/orders.txt", 'ab');
+
+    if (!$fp) {
+      echo "<p><strong>Your order could not be processed at this time. Please try again later.</strong></p>";
+      exit;
     }
+
+    flock($fp, LOCK_EX);
+    fwrite($fp, $outputstring, strlen($outputstring));
+    flock($fp, LOCK_UN);
+    fclose($fp);
+
+    echo "<p>Order written.</p>";
   ?>
 </body>
 </html>
