@@ -16,8 +16,8 @@
       $distance = 50;
       do {
         echo '<tr>
-            <td style=\"text-align: right;\">'.$distance.'</td>
-            <td style=\"text-align: right;\">'.($distance / 10).'</td>
+            <td style="text-align: right;">'.$distance.'</td>
+            <td style="text-align: right;">'.($distance / 10).'</td>
           </tr>'."\n";
         $distance += 50;
       } while ($distance <= 250);
