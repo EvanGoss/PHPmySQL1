@@ -11,11 +11,8 @@
     $prices['Bird Food'] = 2;
     $prices['Dog Food'] = 6;
 
-    while ($element = each($prices)) {
-      echo $element['key'];
-      echo " - ";
-      echo $element['value'];
-      echo "<br />";
+    foreach ($prices as $key => $value) {
+      echo $key." - ".$value."<br />";
     }
   ?>
 </body>
