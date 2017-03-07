@@ -6,13 +6,13 @@
 </head>
 <body>
   <?php
-    function price_compare($x, $y) {
+    function reverse_price_compare($x, $y) {
       if ($x['Price'] == $y['Price']) {
         return 0;
       } else if ($x['Price'] < $y['Price']) {
-        return -1;
-      } else {
         return 1;
+      } else {
+        return -1;
       }
     }
 
@@ -31,7 +31,7 @@
                         'Price' => 3)
                 );
 
-    usort($products, 'price_compare');
+    usort($products, 'reverse_price_compare');
 
     for ($row = 0; $row < count($products); $row++) {
       echo '|'.$products[$row]['Code'].'|'.
