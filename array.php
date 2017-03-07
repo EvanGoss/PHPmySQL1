@@ -11,10 +11,18 @@
                       'Fish Food',
                       'Bird Food');
 
-    rsort($products);
+    shuffle($products);
 
     for ($item = 0; $item < count($products); $item++) {
       echo '|'.$products[$item].'|<br />';
+    }
+
+    echo '<br />';
+
+    $products = array_reverse($products);
+
+    for ($item = 0; $item < count($products); $item++) {
+      echo '|' . $products[$item] . '|<br />';
     }
   ?>
 </body>
