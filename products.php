@@ -6,6 +6,16 @@
 </head>
 <body>
   <?php
+    function price_compare($x, $y) {
+      if ($x['Price'] == $y['Price']) {
+        return 0;
+      } else if ($x['Price'] < $y['Price']) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
+
     $products = array(
                   array('Code' => 'BF',
                         'Description' => 'Bird Food',
@@ -21,7 +31,7 @@
                         'Price' => 3)
                 );
 
-    array_multisort($products, SORT_DESC);
+    usort($products, 'price_compare');
 
     for ($row = 0; $row < count($products); $row++) {
       echo '|'.$products[$row]['Code'].'|'.
