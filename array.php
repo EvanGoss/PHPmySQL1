@@ -11,6 +11,8 @@
                       'Fish Food',
                       'Bird Food');
 
+    sort($products);
+
     for ($item = 0; $item < count($products); $item++) {
       echo '|'.$products[$item].'|<br />';
     }
