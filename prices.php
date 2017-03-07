@@ -11,7 +11,7 @@
     $prices['Bird Food'] = 2;
     $prices['Dog Food'] = 6;
 
-    asort($prices);
+    ksort($prices);
 
     while (list($product, $price) = each($prices)) {
       echo $product." - ".$price."<br />";
