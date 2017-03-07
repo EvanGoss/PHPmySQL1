@@ -21,6 +21,8 @@
                         'Price' => 3)
                 );
 
+    array_multisort($products, SORT_DESC);
+
     for ($row = 0; $row < count($products); $row++) {
       echo '|'.$products[$row]['Code'].'|'.
                $products[$row]['Description'].'|'.
