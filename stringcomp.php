@@ -28,4 +28,30 @@
   printf("The string '%s' is %s characters in length",
     $stringA, strlen($stringA));
 
+  // string position
+  $stringA = "Hello world";
+  $stringB = "Goodbye";
+
+  print("<br />");
+
+  echo strpos($stringA, "o");
+
+  // string replace
+  print("<br />");
+  $result = str_replace("Hello", $stringB, $stringA);
+  echo $result;
+
+  print("<br />");
+  $result = substr_replace($stringA, $stringB, 0, 5);
+  echo $result;
+
+  print("<br />");
+
+  // Regular Expressions
+  $address = 'username@example.com';
+  $arr = preg_split('/\.|@/', $address);
+  while (list($key, $value) = each($arr)) {
+    echo '<br />' . $value;
+  }
+
 ?>
