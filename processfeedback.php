@@ -4,8 +4,18 @@
   $email = trim($_POST['email']);
   $feedback = trim($_POST['feedback']);
 
+  // send feedback to appropriate department
+  if (strstr($feedback, 'shop')) {
+    $toaddress = "evan.goss+retail@gmail.com";
+  } else if (strstr($feedback, 'delivery')) {
+    $toaddress = "evan.goss+fulfillment@gmail.com";
+  } else if (strstr($feedback, 'bill')) {
+    $toaddress = "evan.goss+accounts@gmail.com";
+  } else {
+    $toaddress = "evan.goss@gmail.com";
+  }
+
   // setup static information
-  $toaddress = "evan.goss@gmail.com";
   $subject = "Feedback from web site";
   $mailcontent = "Customer name: " . str_replace("\r\n", "", filter_var($name)) . "\n" .
                  "Customer email: " . str_replace("\r\n", "", $email) . "\n" .
@@ -26,11 +36,11 @@
 
 <body>
   <h1>Feedback submitted</h1>
-  <p>Your feedback (shown below) has been sent.</p>
+  <p>Your feedback (shown below) has been sent to <?php echo $toaddress ?>.</p>
   <p>
     <?php
-      echo "name: " . nl2br(htmlspecialchars($name)) . "\n";
-      echo "email: " . nl2br(htmlspecialchars($email)) . "\n";
+      echo "name: " . nl2br(htmlspecialchars($name)) . "<br />";
+      echo "email: " . nl2br(htmlspecialchars($email)) . "<br />";
       echo "comments: " . nl2br(htmlspecialchars($feedback));
     ?>
   </p>
