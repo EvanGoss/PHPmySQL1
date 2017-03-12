@@ -19,7 +19,7 @@
 </head>
 
 <body>
-  <h1>Exotics and Pets</h1>
+  <?php require('reusable.php'); ?>
   <h2>Customer Orders</h2>
   <?php
     $document_root = $_SERVER['DOCUMENT_ROOT'];
