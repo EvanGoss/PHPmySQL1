@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Exotics and Pets - Order Results</title>
-  
+  <link rel="stylesheet" href="styles/styles.css" type="text/css">
+
   <style type="text/css">
     table, th, td {
       border-collapse: collapse;
@@ -19,8 +20,18 @@
 </head>
 
 <body>
-  <?php require('reusable.php'); ?>
+  <header>
+    <?php require('header.php'); ?>
+  </header>
+
+  <!-- nav menu -->
+  <nav id="menu">
+    <?php require('menu.php'); ?>
+  </nav>
+
+  <br /><br />
   <h2>Customer Orders</h2>
+
   <?php
     $document_root = $_SERVER['DOCUMENT_ROOT'];
     @$orders = file($document_root."/cim/orders/orders.txt");
@@ -67,5 +78,11 @@
     }
     echo "</table>";
   ?>
+
+  <!-- page footer -->
+  <footer>
+    <?php require('footer.php'); ?>
+  </footer>
+
 </body>
 </html>
