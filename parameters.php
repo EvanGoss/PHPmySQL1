@@ -1,6 +1,6 @@
 <?php
-  // Passing parameter by value
-  function increment($value) {
+  // Passing parameter by reference
+  function increment(&$value) {
     $value = $value + 1;
   }
 
