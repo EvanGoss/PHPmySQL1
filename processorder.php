@@ -1,3 +1,6 @@
+<?php
+  require_once("file_exceptions.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +11,6 @@
   <h1>Exotics and Pets</h1>
   <h2>Order Results</h2>
   <?php
-    /* Author: Evan Oldfield Goss
-       Last Modified: 2/8/17
-       This script will process the customer order
-    */
     // create short variables
     $birdfoodqty = $_POST['birdfoodqty'];
     $catfoodqty = $_POST['catfoodqty'];
@@ -77,23 +76,35 @@
     // Create the address line
     echo '<p>Address to ship to is '.htmlspecialchars($address).'</p>';
 
-    // Create teh output string to write to file
+    // Create the output string to write to file
     $outputstring = $date."\t".$birdfoodqty." bird food \t".$catfoodqty." cat food\t".$dogfoodqty." dog food\t".$fishfoodqty." fish food\t\$".$totalAmount."\t".$address."\n";
 
-    // Open file for appending
-    @$fp = fopen($document_root."/cim/orders/orders.txt", 'ab');
+    try {
+      // Open file for appending
+      if (!($fp = @fopen($document_root."/cim/orders/orders.txt", 'ab'))) {
+        throw new fileOpenException();
+      }
+      
+      // Lock the file for writing
+      if (!flock($fp, LOCK_EX)) {
+        throw new fileLockException();
+      }
 
-    if (!$fp) {
-      echo "<p><strong>Your order could not be processed at this time. Please try again later.</strong></p>";
-      exit;
+      // Append the data to the file
+      if (!fwrite($fp, $outputstring, strlen($outputstring))) {
+        throw new fileWriteException();
+      }
+
+      flock($fp, LOCK_UN);
+      fclose($fp);
+      echo "<p>Order written.</p>";
+    } catch (fileOpenException $foe) {
+      echo "<p><strong>Orders file could not be opened.<br />
+        Please contact our webmaster for help.</strong></p>";
+    } catch (Exception $foe) {
+      echo "<p><strong>Orders file could not be opened.<br />
+        Please contact our webmaster for help.</strong></p>";
     }
-
-    flock($fp, LOCK_EX);
-    fwrite($fp, $outputstring, strlen($outputstring));
-    flock($fp, LOCK_UN);
-    fclose($fp);
-
-    echo "<p>Order written.</p>";
   ?>
 </body>
 </html>
