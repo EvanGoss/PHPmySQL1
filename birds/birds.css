@@ -93,13 +93,13 @@ li a:hover {
 	display:block; 
 	background:red;  
 	color:white; 
-	border:5px outset red; 
+	border:4px outset red; 
 	width:115px; 
 }
 /* onmousedown */
 li a:active { 
 	background:maroon;  
-	border:5px inset maroon; 
+	border:4px inset maroon; 
 } 
 .center {
 	text-align: center;
