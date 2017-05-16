@@ -23,7 +23,6 @@
             $fname = $_POST["fname"];
             $lname = $_POST["lname"];
             $email = $_POST["email"];
-            $timestamp = date("Y-m-d H:i:s");
 
             require('mysqli_connect.php');
             $query = "INSERT INTO guest (fname, lname, email) VALUES (?, ?, ?)";
